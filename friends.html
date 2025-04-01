@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Will you forgive me and be your friend again?</h1>
+        <div class="buttons">
+            <button class="yes-button" onclick="handleYesClick()">Yes</button>
+            <button class="no-button" onclick="handleNoClick()">No</button>
+        </div>
+        <div class="gif_container">
+            <img src="gif1.webp" alt="Cute GIF">
+        </div>
+    </div>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        const messages = [
+            "Are you sure?",
+            "Really sure??",
+            "Are you positive?",
+            "Please",
+            "Just think about it!",
+            "If you say no, I will be really sad...",
+            "I will be very sad...",
+            "I will be very very very sad...",
+            "okay fine, I will stop asking...",
+            "Just kidding, say yes please! ❤️"
+        ];
+
+        let messageIndex = 0;
+
+        function handleNoClick() {
+            const noButton = document.querySelector('.no-button');
+            const yesButton = document.querySelector('.yes-button');
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+        }
+
+        function handleYesClick() {
+            emailjs.init("5op7iTLk3m_c3e1KB");
+            emailjs.send("service_n6glk4c","template_ipsrlhh", {
+                message: "Someone clicked 'Yes'!",
+            }).then(
+                function (response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                    alert("I'll be waiting for your message.");
+                    window.location.href = "yes.html";
+                },
+                function (error) {
+                    console.log("FAILED...", error);
+                    alert("I'll be waiting for your message!");
+                    window.location.href = "yes.html";
+                }
+            );
+        }
+    </script>
+</body>
+</html>
