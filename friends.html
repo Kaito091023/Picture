@@ -15,7 +15,6 @@
             <img src="gif1.webp" alt="Cute GIF">
         </div>
     </div>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         const messages = [
             "Are you sure?",
@@ -40,6 +39,10 @@
             const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
             yesButton.style.fontSize = `${currentSize * 1.5}px`;
         }
+        function handleYesClick()
+‎            console.log("SUCCESS!", response.status, response.text);
+‎            alert("I'll be waiting for your message.");
+‎            window.location.href="yes.html";
     </script>
 </body>
 </html>
